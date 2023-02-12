@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit";
 import { db } from "$lib/firebase.js";
-import { collection, getDocs } from "Firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
 export async function GET({ url }) {
   const colRef = collection(db, "items");

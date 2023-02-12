@@ -7,6 +7,24 @@
 	"settings": {
 		"liveSassCompile.settings.includeItems": [
         "/static/global.sass"
-    ],
+		],
+		"files.exclude": {
+			"**/.git": true,
+			"**/.svn": true,
+			"**/.hg": true,
+			"**/CVS": true,
+			"**/.DS_Store": true,
+			"**/Thumbs.db": true,
+			"**/node_modules": true,
+			"firestore-debug.log": true,
+			"ui-debug.log": true,
+			"**/.svelte-kit": true,
+			"**/.vscode": true,
+			"package-lock.json": true,
+			".npmrc": true,
+			".firebaserc": true,
+			"firebase.json": true
+		},
+		"explorerExclude.backup": {},
 	}
 }

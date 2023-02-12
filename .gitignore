@@ -8,9 +8,12 @@ node_modules
 !.env.example
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
-
-.readme.blog.md
 .vscode
+
+# Firebase
 ui-debug.log
 firestore-debug.log
 .firebase-export
+
+# Netlify
+.netlify

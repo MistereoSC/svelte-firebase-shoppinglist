@@ -4,7 +4,11 @@ import path from "path";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  preprocess: preprocess({}),
+  preprocess: preprocess({
+    sass: {
+      prependData: `@use 'src/sass/colors' as colors`,
+    },
+  }),
   kit: {
     adapter: adapter(),
   },

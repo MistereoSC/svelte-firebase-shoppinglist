@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveSassCompile.settings.includeItems": [
+        "/static/global.sass"
+    ],
+	}
+}

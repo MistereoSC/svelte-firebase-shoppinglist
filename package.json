@@ -5,7 +5,9 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"serve": "vite build && vite preview",
+		"emulate": "firebase emulators:start --import ./.firebase-export --export-on-exit ./.firebase-export" 
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
@@ -15,5 +17,8 @@
 		"svelte-preprocess": "^5.0.1",
 		"vite": "^4.0.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"firebase": "^9.17.1"
+	}
 }

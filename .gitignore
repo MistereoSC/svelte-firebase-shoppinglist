@@ -11,3 +11,6 @@ vite.config.ts.timestamp-*
 
 .readme.blog.md
 .vscode
+ui-debug.log
+firestore-debug.log
+.firebase-export

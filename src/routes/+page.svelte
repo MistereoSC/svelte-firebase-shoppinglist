@@ -6,7 +6,7 @@
 </div>
 
 <style lang="sass">
-@use 'src/sass/colors' as c
+
 h1
-  background: c.$background-highlight
+  background: colors.$background-highlight
 </style>

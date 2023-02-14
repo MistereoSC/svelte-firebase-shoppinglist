@@ -13,6 +13,7 @@ export async function PATCH({ params, request }) {
     "items",
     params.itemID
   );
+  //TODO: filter request
   await updateDoc(ref, body);
   return new Response(JSON.stringify({ status: 200, message: "OK" }));
 }

@@ -1,6 +1,13 @@
 import { error } from "@sveltejs/kit";
 import { db } from "$lib/firebase.js";
-import { collection, doc, getDocs, getDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  getDoc,
+  query,
+  orderBy,
+} from "firebase/firestore";
 
 export async function GET({ params }) {
   //Get list
@@ -15,13 +22,16 @@ export async function GET({ params }) {
   const subCollectionsRef = collection(listReference, "subCollections");
   let subCollections = await getDocs(subCollectionsRef);
   subCollections.forEach((itm) => {
-    resp.subCollections.push({ ...itm.data(), id: itm.id, items: [] });
+    if (itm.data.isMainList) {
+      resp.subCollections.unshft({ ...itm.data(), id: itm.id, items: [] });
+    } else {
+      resp.subCollections.push({ ...itm.data(), id: itm.id, items: [] });
+    }
   });
 
   //Get items in sublists
   for (let idx = 0; idx < resp.subCollections.length; idx++) {
     const subListID = resp.subCollections[idx].id;
-
     const subListReference = collection(subCollectionsRef, subListID, "items");
     let subList = await getDocs(subListReference);
     subList.forEach((itm) => {

@@ -4,7 +4,6 @@ import { collection, getDocs } from "firebase/firestore";
 
 //TODO: Remove
 export async function GET({ url }) {
-  //Get list
   let resp = [];
   const listsReference = collection(db, "lists");
   let lists = await getDocs(listsReference);

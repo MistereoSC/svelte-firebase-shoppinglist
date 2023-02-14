@@ -12,7 +12,11 @@ export async function POST({ params, request }) {
     params.subListID,
     "items"
   );
-  if (!body.name) {
+  if (
+    !body.name ||
+    typeof body.name != "string" ||
+    (typeof body.done != "undefined" && typeof body.done != "boolean")
+  ) {
     return new Response(
       JSON.stringify({
         status: 400,
@@ -21,12 +25,11 @@ export async function POST({ params, request }) {
       })
     );
   }
-  if (typeof body.done != "undefined" && typeof body.done != "boolean") {
+  if (body.name.length < 3) {
     return new Response(
       JSON.stringify({
         status: 400,
-        message:
-          "Item must be a JSON object with a 'name: string' field and optionally a 'done: boolean' field",
+        message: "Item name property must be at least 3 characters long",
       })
     );
   }

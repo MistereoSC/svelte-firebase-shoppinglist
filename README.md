@@ -1,4 +1,4 @@
-A simple shared shopping list using Svelte and Firestore to learn those frameworks.
+A small side-project to learn SvelteKit and Firebase, and experimenting with creating an API backend.
 
 
 

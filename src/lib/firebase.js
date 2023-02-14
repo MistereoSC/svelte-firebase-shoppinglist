@@ -1,14 +1,19 @@
 import { deleteApp, getApp, getApps, initializeApp } from "firebase/app";
-import { getAuth, setPersistence, inMemoryPersistence } from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  setPersistence,
+  inMemoryPersistence,
+} from "firebase/auth";
 import {
   doc,
   getFirestore,
   connectFirestoreEmulator,
 } from "firebase/firestore";
 
+//CONFIG
 import dotenv from "dotenv";
 dotenv.config();
-
 const firebaseConfig = {
   apiKey: process.env.VITE_FIREBASE_APIKEY,
   authDomain: process.env.VITE_FIREBASE_AUTHDOMAIN,
@@ -28,12 +33,24 @@ if (!getApps().length) {
   firebaseApp = initializeApp(firebaseConfig);
 }
 
-const auth = getAuth(firebaseApp);
+//FIRESTORE
 let db = getFirestore();
-// if (process.env.NODE_ENV === "development") {
-//   connectFirestoreEmulator(db, "localhost", 8080);
-// }
+if (process.env.VITE_USE_FIREBASE_EMULATOR === "true") {
+  connectFirestoreEmulator(db, "localhost", 8080);
+}
+//const userDoc = (userId) => doc(db, "users", userId);
 
-const userDoc = (userId) => doc(db, "users", userId);
-
+//AUTHENTICATION
+const auth = getAuth(firebaseApp);
+const cred = process.env.VITE_FIREBASE_AUTHCRED;
+const scrt = process.env.VITE_FIREBASE_AUTHSECRET;
+signInWithEmailAndPassword(auth, cred, scrt)
+  .then((userCredential) => {
+    const user = userCredential.user;
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.error(errorCode, errorMessage);
+  });
 export { auth, db };

@@ -13,6 +13,7 @@ vite.config.ts.timestamp-*
 # Firebase
 ui-debug.log
 firestore-debug.log
+firebase-debug.log
 .firebase-export
 
 # Netlify

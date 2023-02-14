@@ -23,7 +23,9 @@
 			"package-lock.json": true,
 			".npmrc": true,
 			".firebaserc": true,
-			"firebase.json": true
+			"firebase.json": true,
+			"build": true,
+			"firebase-debug.log": true
 		},
 		"explorerExclude.backup": {},
 	}

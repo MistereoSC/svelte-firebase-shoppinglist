@@ -25,11 +25,11 @@ export async function POST({ params, request }) {
       })
     );
   }
-  if (body.name.length < 3) {
+  if (body.name.length < 3 || body.name.length > 20) {
     return new Response(
       JSON.stringify({
         status: 400,
-        message: "Item name property must be at least 3 characters long",
+        message: "Item name property must be between 3 and 20 characters long",
       })
     );
   }

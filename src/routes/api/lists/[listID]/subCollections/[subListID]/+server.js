@@ -11,12 +11,17 @@ export async function PATCH({ params, request }) {
     "subCollections",
     params.subListID
   );
-  if (body.title.length < 3 || typeof body.title != "string" || !body.title) {
+  if (
+    body.title.length < 3 ||
+    body.title.length > 20 ||
+    typeof body.title != "string" ||
+    !body.title
+  ) {
     return new Response(
       JSON.stringify({
         status: 400,
         message:
-          "Request must be an Object {title: string}, and title must be at least 3 characters long",
+          "Request must be an Object {title: string}, and title must be between 3 and 20 characters long",
       })
     );
   }
@@ -24,7 +29,14 @@ export async function PATCH({ params, request }) {
   return new Response(JSON.stringify({ status: 200, message: "OK" }));
 }
 
-//TODO: Implement
-export async function DELETE({ params, request }) {
+export async function DELETE({ params }) {
+  const ref = doc(
+    db,
+    "lists",
+    params.listID,
+    "subCollections",
+    params.subListID
+  );
+  await deleteDoc(ref);
   return new Response(JSON.stringify({ status: 200, message: "OK" }));
 }

@@ -20,10 +20,11 @@ export async function GET({ params }) {
 
   //Get sublists in list
   const subCollectionsRef = collection(listReference, "subCollections");
-  let subCollections = await getDocs(subCollectionsRef);
+  let collectionQuery = await query(subCollectionsRef, orderBy("title", "asc"));
+  let subCollections = await getDocs(collectionQuery);
   subCollections.forEach((itm) => {
-    if (itm.data.isMainList) {
-      resp.subCollections.unshft({ ...itm.data(), id: itm.id, items: [] });
+    if (itm.data().isMainList) {
+      resp.subCollections.unshift({ ...itm.data(), id: itm.id, items: [] });
     } else {
       resp.subCollections.push({ ...itm.data(), id: itm.id, items: [] });
     }
@@ -33,7 +34,8 @@ export async function GET({ params }) {
   for (let idx = 0; idx < resp.subCollections.length; idx++) {
     const subListID = resp.subCollections[idx].id;
     const subListReference = collection(subCollectionsRef, subListID, "items");
-    let subList = await getDocs(subListReference);
+    const itemQuery = await query(subListReference, orderBy("done", "asc"));
+    let subList = await getDocs(itemQuery);
     subList.forEach((itm) => {
       resp.subCollections[idx].items.push({ ...itm.data(), id: itm.id });
     });

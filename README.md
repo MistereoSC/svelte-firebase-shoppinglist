@@ -1,5 +1,6 @@
 A small side-project to learn SvelteKit and Firebase, and experimenting with creating an API backend.
-
+<br>
+( Frontpage still missing, currently no new Lists can be created )
 
 
 # Run and Deploy
